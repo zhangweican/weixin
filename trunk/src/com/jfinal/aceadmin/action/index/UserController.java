@@ -29,6 +29,7 @@ public class UserController extends Controller {
 					String nickname = "信息缺失";
 					String province = "未知";
 					String city = "未知";
+					int groupid = 0;
 					//获取用户信息
 					try {
 						String url1 = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + WeixinUtil.getAccessToken() + "&openid=" + id +"&lang=zh_CN";
@@ -36,11 +37,12 @@ public class UserController extends Controller {
 						nickname = json1.getString("nickname");
 						province = json1.getString("province");
 						city = json1.getString("city");
+						groupid = json1.getInt("groupid");
 					} catch (Exception ee) {
 						logger.error("获取用户信息失败", ee);
 						ee.printStackTrace();
 					}
-					users.put(id, nickname + " " + "(" + province + "," + city +")");
+					users.put(id, nickname + " " + "(" + province + "," + city +") 组ID：" + groupid);
 				}
 			}
 		} catch (Exception e) {
