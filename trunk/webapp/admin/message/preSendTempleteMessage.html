@@ -1,0 +1,32 @@
+
+	<form action="${contextPath}/admin/message/sendTempleteMessage" method="post">
+		模板ID：<input name="template_id" value="">
+		接收者：<input name="touser" value="">
+		模板参数赋值<textarea rows="20" cols="150" name="data">
+		{
+                   "first": {
+                       "value":"恭喜你购买成功！",
+                       "color":"#173177"
+                   },
+                   "keyword1":{
+                       "value":"巧克力",
+                       "color":"#173177"
+                   },
+                   "keyword2": {
+                       "value":"39.8元",
+                       "color":"#173177"
+                   },
+                   "keyword3": {
+                       "value":"2014年9月22日",
+                       "color":"#173177"
+                   },
+                   "remark":{
+                       "value":"欢迎再次购买！",
+                       "color":"#173177"
+                   }
+           }
+		</textarea>
+		<input type="submit" value="OK"/>
+	</form>
+
+
