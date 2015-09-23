@@ -30,36 +30,4 @@ public class ToolsController extends Controller {
 		}
 		renderHtml("<img src=\"" + iframeSrc + "\"/>");
 	}
-	
-	public void preUploadImage2Media(){
-		render("preUploadImage2Media.html");
-	}
-	public void uploadImage2Media(){
-		String type = "image";
-		UploadFile uFile = getFile("file");
-		String msg = "";
-		if(uFile == null || uFile.getFile() == null){
-			msg = "上传的文件错误";
-		}
-		else if(!uFile.getOriginalFileName().toLowerCase().endsWith(".png") && !uFile.getOriginalFileName().toLowerCase().endsWith(".jpg")){
-			msg = "文件格式不正确";
-		}
-		else if(uFile.getFile().length() > 1024 * 1024){ //1M
-			msg = "文件太大";
-		}
-		else{
-			try {
-				String url = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?type=" + type + "&access_token=" + WeixinUtil.getAccessToken();
-				String result = Utils.uploadFile(url, uFile.getFile());
-				JSONObject json = JSONObject.fromObject(result);
-				String imageURL = json.getString("url");
-				msg = "成功。<img src=\"" + imageURL +"\">";
-			} catch (Exception e) {
-				logger.error("上传图片失败", e);
-				msg = "上传图片失败";
-				e.printStackTrace();
-			}
-		}
-		renderHtml("结果：" + msg);
-	}
 }

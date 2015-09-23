@@ -1,0 +1,28 @@
+	<h3>
+			<a href="${contextPath}/admin/news/preAdd">新增图文</a><br/>
+	</h3>
+	
+    <table width="100%" border =1>
+        <thead>
+            <tr>
+                <th width="100">media_id</th>
+                <th width="100">Value</th>
+                <th width="120">Operate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <#if images?exists>
+                <#list images.keySet() as mKey> 
+                   <tr>
+                           <td>${mKey}</td>
+                           <td>${images.get(mKey)}</td>
+                           <td><a href="${contextPath}/admin/image/del?media_id=${mKey}">删除</a></td>
+                   </tr>
+                </#list>
+            </#if>
+            <tr>
+                   <td>合计个数:</td>
+                   <td>${total_count}</td>
+           </tr>
+        </tbody>
+    </table>

@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,17 +24,29 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
+import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
 
 import com.jfinal.aceadmin.bean.SearchPage;
+import com.jfinal.log.Logger;
 import com.tsc9526.monalisa.core.query.Page;
 import com.tsc9526.monalisa.core.query.dao.Model;
 import com.tsc9526.monalisa.core.tools.ClassHelper.FGS;
 
 public class Utils {
-	
+	private static Logger logger = Logger.getLogger(Utils.class.getName());
 	public static String encryptPassword(String password,String key){
         char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};       
         try {
@@ -428,4 +441,55 @@ public class Utils {
         return s.toString();
  
     }
+    
+    /**
+     * 微信服务器素材上传
+     * @param file  表单名称media
+     * @param token access_token
+     * @param type  type只支持四种类型素材(video/image/voice/thumb)
+     */
+    public static JSONObject uploadMedia(String url,File file, String token, String type) {
+        if(file==null||token==null||type==null){
+            return null;
+        }
+
+        if(!file.exists()){
+            logger.info("上传文件不存在,请检查!");
+            return null;
+        }
+
+        JSONObject jsonObject = null;
+        PostMethod post = new PostMethod(url);
+        post.setRequestHeader("Connection", "Keep-Alive");
+        post.setRequestHeader("Cache-Control", "no-cache");
+        FilePart media = null;
+        HttpClient httpClient = new HttpClient();
+        //信任任何类型的证书
+        Protocol myhttps = new Protocol("https", new MySSLProtocolSocketFactory(), 443); 
+        Protocol.registerProtocol("https", myhttps);
+
+        try {
+            media = new FilePart("media", file);
+            Part[] parts = new Part[] { new StringPart("access_token", token),
+                    new StringPart("type", type), media };
+            MultipartRequestEntity entity = new MultipartRequestEntity(parts,
+                    post.getParams());
+            post.setRequestEntity(entity);
+            int status = httpClient.executeMethod(post);
+            if (status == HttpStatus.SC_OK) {
+                String text = post.getResponseBodyAsString();
+                jsonObject = JSONObject.fromObject(text);
+            } else {
+                logger.info("upload Media failure status is:" + status);
+            }
+        } catch (FileNotFoundException execption) {
+            logger.error("Error",execption);
+        } catch (HttpException execption) {
+        	logger.error("Error",execption);
+        } catch (IOException execption) {
+        	logger.error("Error",execption);
+        }
+        return jsonObject;
+    }
+    
 }

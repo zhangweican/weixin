@@ -4,9 +4,11 @@ import java.io.File;
 import java.util.Properties;
 
 import com.jfinal.aceadmin.action.index.AdminController;
+import com.jfinal.aceadmin.action.index.ImageController;
 import com.jfinal.aceadmin.action.index.IndexController;
 import com.jfinal.aceadmin.action.index.MenuController;
 import com.jfinal.aceadmin.action.index.MessageController;
+import com.jfinal.aceadmin.action.index.NewsController;
 import com.jfinal.aceadmin.action.index.ToolsController;
 import com.jfinal.aceadmin.action.index.UserController;
 import com.jfinal.aceadmin.interceptor.AuthInterceptor;
@@ -58,6 +60,8 @@ public class JFinalAceAdminConfig extends JFinalConfig {
 		me.add("/admin/user", UserController.class, "/admin/user");
 		me.add("/admin/message", MessageController.class, "/admin/message");
 		me.add("/admin/tools", ToolsController.class, "/admin/tools");
+		me.add("/admin/image", ImageController.class, "/admin/image");
+		me.add("/admin/news", NewsController.class, "/admin/news");
 		
 	}
 	
