@@ -14,6 +14,7 @@ com\jfinal\aceadmin\bean\WeixinInput.class
 com\jfinal\aceadmin\bean\ReceiveMessageOutput.class
 com\jfinal\aceadmin\bean\SearchPage.class
 com\jfinal\aceadmin\action\index\IndexController$1.class
+com\jfinal\aceadmin\utils\MySSLProtocolSocketFactory$1.class
 com\jfinal\aceadmin\action\index\AdminController.class
 com\jfinal\aceadmin\interceptor\AuthInterceptor.class
 com\jfinal\aceadmin\process\ReceiveMessageProcess.class
