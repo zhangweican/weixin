@@ -1,10 +1,15 @@
 
 	<form action="${contextPath}/admin/news/add" method="post">
 		title<input type="text" name="title">
+		<br>
 		thumb_media_id<input type="text" name="thumb_media_id">
+		<br>
 		author<input type="text" name="author">
+		<br>
 		digest<input type="text" name="digest">
+		<br>
 		show_cover_pic<select name="show_cover_pic"><option value="0">不显示封面</option><option value="1">显示封面</option></select>
+		<br>
 		content
 		<textarea rows="20" cols="150" name="content">
 			<h3>我是标题啊</h3>
@@ -13,7 +18,9 @@
 				<tr><td>图片</td><td><img src=""/></td></tr>
 			</table>
 		</textarea>
+		<br>
 		content_source_url<input type="text" name="content_source_url">
+		<br>
 		<input type="submit" value="OK"/>
 		
 	</form>
