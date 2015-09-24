@@ -39,7 +39,7 @@ public class ReceiveMessageProcess implements IProcess{
 		
 		int random = (int)(Math.random()*10);
 		if(AD == random){
-			logger.error("启动一次广告时间给用户:" + e.getFromUserName());
+			logger.info("启动一次广告时间给用户:" + e.getFromUserName());
 			ReceiveMessageNewsOutput ot = new ReceiveMessageNewsOutput();
 			ot.setTo(e.getFromUserName());
 			ot.setFrom(e.getToUserName());
@@ -54,6 +54,7 @@ public class ReceiveMessageProcess implements IProcess{
 				
 				items.add(item);
 			}
+			ot.setItems(items);
 			ot.setArticleCount(totalItem);
 			return ot;
 		}

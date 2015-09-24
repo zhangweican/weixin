@@ -25,10 +25,12 @@ public class ImageController extends Controller {
 		           + "}";
 		int total_count = 0;
 		int item_count = 0;
+		String msg = "";
 		Map<String,String> images = new HashMap<String,String>();
 		try {
 			String u = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=" + WeixinUtil.getAccessToken();
 			JSONObject json = JSONObject.fromObject(HttpKit.post(u, post));
+			msg = json.toString();
 			total_count = json.getInt("total_count");
 			item_count = json.getInt("item_count");
 			if(item_count > 0){
@@ -45,6 +47,7 @@ public class ImageController extends Controller {
 		}
 		setAttr("total_count", total_count);
 		setAttr("images", images);
+		setAttr("msg", msg);
 		render("list.html");
 	}
 	public void del(){

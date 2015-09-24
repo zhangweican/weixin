@@ -5,9 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 public class ReceiveMessageNewsOutput extends ReceiveMessageOutput {
-	private String to;
-	private String from;
-	
 	private int ArticleCount;
 	private List<ReceiveMessageNewsItem> items = new ArrayList<ReceiveMessageNewsItem>();
 
@@ -32,9 +29,9 @@ public class ReceiveMessageNewsOutput extends ReceiveMessageOutput {
 		StringBuffer sb = new StringBuffer();  
         Date date = new Date();  
         sb.append("<xml><ToUserName><![CDATA[");  
-        sb.append(to);  
+        sb.append(getTo());  
         sb.append("]]></ToUserName><FromUserName><![CDATA[");  
-        sb.append(from);  
+        sb.append(getFrom());  
         sb.append("]]></FromUserName><CreateTime>");  
         sb.append(date.getTime());  
         sb.append("</CreateTime><MsgType><![CDATA[text]]></MsgType>");  
