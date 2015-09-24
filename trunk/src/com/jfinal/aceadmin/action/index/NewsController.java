@@ -1,5 +1,7 @@
 package com.jfinal.aceadmin.action.index;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,10 +27,12 @@ public class NewsController extends Controller {
 		int show_cover_pic = 0;
 		String content = "";
 		String content_source_url = "";
+		String msg = "";
 		try {
 			String url = "https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=" + WeixinUtil.getAccessToken();
 			JSONObject json = JSONObject.fromObject(HttpKit.post(url, "{\"media_id\":\"" + media_id + "\"}"));
 			JSONObject obj = json.getJSONArray("news_item").getJSONObject(0);
+			msg = json.toString();
 			title = obj.getString("title");
 			thumb_media_id = obj.getString("thumb_media_id");
 			author = obj.getString("author");
@@ -48,6 +52,7 @@ public class NewsController extends Controller {
 		setAttr("content",content);
 		setAttr("content_source_url",content_source_url);
 		
+		setAttr("msg", msg);
 		render("preUpdate.html");
 	}
 	public void preAdd(){
@@ -61,7 +66,11 @@ public class NewsController extends Controller {
 		int show_cover_pic = getParaToInt("show_cover_pic");
 		String content = getPara("content");
 		String content_source_url = getPara("content_source_url");
-		
+		/*try {
+			content = URLEncoder.encode(content, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}*/
 		String media_id = "";
 		String data = "{"
 				  + "\"articles\": [{"

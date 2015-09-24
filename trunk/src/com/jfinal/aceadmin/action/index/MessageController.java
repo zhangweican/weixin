@@ -48,7 +48,7 @@ public class MessageController extends Controller {
 	}
 	
 	public void preSendAllMessage(){
-		render("preSendAllMessage");
+		render("preSendAllMessage.html");
 	}
 	public void sendAllMessage(){
 		String msgtype = getPara("msgtype");
@@ -62,9 +62,9 @@ public class MessageController extends Controller {
 			tStr = "\"text\":{\"content\":\"" + content +"\"}";
 		}
 		String post = "{"
-			+ "\"filter\":{\"is_to_all\":true,\"group_id\":\"2\"},"
+			+ "\"filter\":{\"is_to_all\":true},"
 			+ tStr + ","
-		    + "\"msgtype\":\"text\""
+		    + "\"msgtype\":\"" + msgtype +"\""
 		+ "}";
 		String errmsg = "";
 		try {
