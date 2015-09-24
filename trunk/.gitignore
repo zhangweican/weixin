@@ -25,3 +25,6 @@ integration-repo
 /webapp/WEB-INF/target/
 dev_plan.txt
 /target/
+
+
+/target
