@@ -46,4 +46,37 @@ public class MessageController extends Controller {
 		
 		renderHtml("发送结果：" + errmsg);
 	}
+	
+	public void preSendAllMessage(){
+		render("preSendAllMessage");
+	}
+	public void sendAllMessage(){
+		String msgtype = getPara("msgtype");
+		String media_id = getPara("media_id");
+		String content = getPara("content");
+		String tStr = "";
+		if("mpnews".equals(msgtype)){
+			tStr = "\"mpnews\":{\"media_id\":\"" + media_id +"\"}";
+		}
+		else if("text".equals(msgtype)){
+			tStr = "\"text\":{\"content\":\"" + content +"\"}";
+		}
+		String post = "{"
+			+ "\"filter\":{\"is_to_all\":true,\"group_id\":\"2\"},"
+			+ tStr + ","
+		    + "\"msgtype\":\"text\""
+		+ "}";
+		String errmsg = "";
+		try {
+			String u = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=" + WeixinUtil.getAccessToken();
+			JSONObject json = JSONObject.fromObject(HttpKit.post(u, post));
+			errmsg = json.getString("errmsg");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		renderHtml("发送结果：" + errmsg);
+		
+	}
 }

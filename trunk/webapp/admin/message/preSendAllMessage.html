@@ -1,0 +1,12 @@
+
+	<form action="${contextPath}/admin/message/sendAllMessage" method="post">
+		发送类型<select name="msgtype">
+			<option value="mpnews">图文格式</option>
+			<option value="text">纯文本格式</option>
+		</select>
+		media_id(图文格式时候，这个必填)：<input name="media_id" value="">
+		content(纯文本格式时候，这个必填)：<input name="content" value="">
+		<input type="submit" value="OK"/>
+	</form>
+
+
