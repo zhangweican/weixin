@@ -6,6 +6,7 @@ E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\SearchPage.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\utils\Commons.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\action\index\AdminController.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\utils\WeixinUtil.java
+E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\ReceiveMessageNewsItem.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\action\index\MenuController.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\handle\CharacterHandler.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\process\UnSubscribeProcess.java
@@ -26,6 +27,7 @@ E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\HotMenuOutput.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\UnSubscribeOutput.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\ZanMenuOutput.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\action\index\MessageController.java
+E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\ReceiveMessageNewsOutput.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\SubscribeOutput.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\bean\WeixinInput.java
 E:\project_java\weixin\trunk\src\com\jfinal\aceadmin\process\ProcessFactory.java
