@@ -5,6 +5,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -132,7 +134,7 @@ public class NewsController extends Controller {
 		String post = "{"
 		           + "\"type\":\"" + Type + "\","
 		           + "\"offset\":0,"
-		           + "\"count\":20"       
+		           + "\"count\":3"       
 		           + "}";
 		int total_count = 0;
 		int item_count = 0;
@@ -148,8 +150,13 @@ public class NewsController extends Controller {
 				JSONArray items = json.getJSONArray("item");
 				for(int i = 0 ;i < items.size(); i++){
 					JSONObject jo = items.getJSONObject(i);
-					images.put(jo.getString("media_id"), jo.getString("title") + " | " 
-							+ jo.getString("content"));
+					JSONArray content = jo.getJSONObject("content").getJSONArray("news_item");
+					for(int j = 0 ; j < content.size(); j ++){
+						JSONObject jobject = content.getJSONObject(j);
+						String cc = jobject.getString("content");
+						cc = StringEscapeUtils.escapeHtml(cc);
+						images.put(jo.getString("media_id"), jobject.getString("title") + " | " + cc);
+					}
 				}
 			}
 		} catch (Exception e) {
