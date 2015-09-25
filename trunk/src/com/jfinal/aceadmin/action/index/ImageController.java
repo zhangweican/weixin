@@ -21,7 +21,7 @@ public class ImageController extends Controller {
 		String post = "{"
 		           + "\"type\":\"" + Type + "\","
 		           + "\"offset\":0,"
-		           + "\"count\":20"       
+		           + "\"count\":3"       
 		           + "}";
 		int total_count = 0;
 		int item_count = 0;
